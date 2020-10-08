@@ -15,21 +15,24 @@ def main():
     C = rankmetric.linear_space_spanned_by(B, p)
     print("Generated Rank-metric code:", matrices.show_matrices(C), sep="\n")
 
-    print("γ(C) =", rankmetric.gamma(C, p))
+    print("γ(C) =", rankmetric.gamma(C, p, get_evidence=True))
 
-    C1 = rankmetric.linear_space_spanned_by(
-        [
+    print("--------------------------------------------------------------")
+
+    B1= [
          np.array([[1,0,0],
                    [0,1,1],
                    [0,0,0]]),
          np.array([[0,0,0],
                    [0,0,0],
                    [0,0,1]])
-        ], p)
+        ]
+    C1 = rankmetric.linear_space_spanned_by(B1, p)
+    print("Pseudo-generator matrix of C1:")
+    print(matrices.show_matrix(rankmetric.pseudo_generator_matrix(B1)))
     print("γ(C1) =", rankmetric.gamma(C1, p))
 
-    C2 = rankmetric.linear_space_spanned_by(
-        [
+    B2 = [
          np.array([[1,0,0],
                    [0,0,0],
                    [0,0,0]]),
@@ -39,11 +42,13 @@ def main():
          np.array([[0,0,0],
                    [0,0,0],
                    [0,1,0]])
-        ], p)
+        ]
+    C2 = rankmetric.linear_space_spanned_by(B2, p)
+    print("Pseudo-generator matrix of C2:")
+    print(matrices.show_matrix(rankmetric.pseudo_generator_matrix(B2)))
     print("γ(C2) =", rankmetric.gamma(C2, p))
 
-    C3 = rankmetric.linear_space_spanned_by(
-        [
+    B3= [
          np.array([[1,0,0],
                    [0,0,0],
                    [0,0,0]]),
@@ -53,11 +58,13 @@ def main():
          np.array([[0,0,0],
                    [0,0,0],
                    [1,0,0]])
-        ], p)
+        ]
+    C3 = rankmetric.linear_space_spanned_by(B3, p)
+    print("Pseudo-generator matrix of C3:")
+    print(matrices.show_matrix(rankmetric.pseudo_generator_matrix(B3)))
     print("γ(C3) =", rankmetric.gamma(C3, p))
 
-    C4 = rankmetric.linear_space_spanned_by(
-        [
+    B4= [
          np.array([[1,0,0],
                    [0,0,0],
                    [0,0,0]]),
@@ -67,7 +74,10 @@ def main():
          np.array([[0,0,0],
                    [0,0,0],
                    [0,0,1]])
-        ], p)
+        ]
+    C4 = rankmetric.linear_space_spanned_by(B4, p)
+    print("Pseudo-generator matrix of C4:")
+    print(matrices.show_matrix(rankmetric.pseudo_generator_matrix(B4)))
     print("γ(C4) =", rankmetric.gamma(C4, p))
 
 

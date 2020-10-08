@@ -1,9 +1,11 @@
 import numpy as np
 from itertools import combinations
-from typing import List
+from typing import List, Tuple, Union
 
 from .nary import all_nary
 from .type_def import prime, Codeword, Code
+
+INFINITY = 9999999
 
 def linear_space_spanned_by(bases: List[Codeword], p: prime) -> Code:
     """
@@ -142,7 +144,7 @@ def direct_sum(Vs: List[np.array], p: prime) -> List[np.array]:
     , p)
 
 
-def gamma(C: Code, p: prime) -> int:
+def gamma(C: Code, p: prime, get_evidence: bool=False) -> Union[int, Tuple[int, Tuple[np.ndarray]]]:
     """
     Calcurate the covering dimensinon of a rank-metric code.
     γ(C) := min{r∈Z+:∃D≤C, dimD=r, ⊕[M∈D]col(M)=Fp^n}
@@ -152,12 +154,20 @@ def gamma(C: Code, p: prime) -> int:
     p: {int}                 - A prime number for Fp
 
     Returns:
-    {int} - The covering dimension of a given rank-metric code
+    {Union[int, (int, List[numpy.ndarray]])}
+    -- If get_evidence is true,
+        {int} - The covering dimension of a given rank-metric code
+    -- otherwise,
+        {(int, Tuple[numpy.ndarray])} - The tuple of γ(C) and a codeword covering Fp^m
     """
     criteria = p ** C[0].shape[0] # The number of all vectors in Fp^k
     for r in range(len(C)):
         for cwds in combinations(C, r):
-            # Judge if the direct sum of colmun spaces could cover according to identification to criteria
+            # Judge if the direct sum of colmun spaces could cover, according to identification to criteria
             if len(direct_sum(map(lambda cwd: col(cwd, p), cwds), p)) == criteria:
+                if get_evidence:
+                    return (r, cwds)
                 return r
-    return 9999999 # Representation of infinity
+    if get_evidence:
+        return (INFINITY, tuple([]))
+    return INFINITY # Representation of infinity
