@@ -146,7 +146,7 @@ def direct_sum(Vs: List[np.array], p: prime) -> List[np.array]:
 
 def gamma(C: Code, p: prime, get_evidence: bool=False) -> Union[int, Tuple[int, Tuple[np.ndarray]]]:
     """
-    Calcurate the covering dimensinon of a rank-metric code.
+    Calculate the covering dimension of a rank-metric code.
     γ(C) := min{r∈Z+:∃D≤C, dimD=r, ⊕[M∈D]col(M)=Fp^n}
 
     Arguments:
