@@ -128,7 +128,7 @@ def cols(matrices: List[np.ndarray], p: prime) -> List[np.ndarray]:
     return direct_sum(map(lambda b: col(b,p), matrices), p)
 
 
-def direct_sum(Vs: List[np.array], p: prime) -> List[np.array]:
+def direct_sum(Vs: List[np.ndarray], p: prime) -> List[np.ndarray]:
     """
     Return the direct sum of given vector spaces over Fp.
 
@@ -137,7 +137,7 @@ def direct_sum(Vs: List[np.array], p: prime) -> List[np.array]:
     p : {int}                 - A prime number for Fp
 
     Returns:
-    {List[np.array]} - The direct sum of vector spaces over Fp
+    {List[numpy.ndarray]} - The direct sum of vector spaces over Fp
     """
     return pseudo_code_generated_by(
         np.array(list({*map(tuple, sum(Vs, []))}))

@@ -13,6 +13,6 @@ def F(p: prime, n: int) -> List[np.ndarray]:
     n: {int} - the length (or dimension) of vector
 
     Returns:
-    {List[numpy.array]} - The list of all n-dimensional vectors in Fp
+    {List[numpy.ndarray]} - The list of all n-dimensional vectors in Fp
     """
     return [np.array(v) for v in all_nary(p, n)]
