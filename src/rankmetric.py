@@ -143,7 +143,7 @@ def direct_sum(Vs: List[np.ndarray], p: prime) -> List[np.ndarray]:
     {List[numpy.ndarray]} - The direct sum of vector spaces over Fp
     """
     return pseudo_code_generated_by(
-        np.array(list({*map(tuple, sum(Vs, []))}))
+        np.array( list({*map(tuple, sum(Vs, []))}) )
     , p)
 
 
@@ -168,9 +168,6 @@ def gamma(C: Code, p: prime, get_evidence: bool=False) -> Union[int, Tuple[int, 
         for cwds in combinations(C, r):
             # Judge if the direct sum of colmun spaces could cover, according to identification to criteria
             if len(direct_sum(map(lambda cwd: col(cwd, p), cwds), p)) == criteria:
-                if get_evidence:
-                    return (r, cwds)
-                return r
-    if get_evidence:
-        return (INFINITY, tuple([]))
-    return INFINITY # Representation of infinity
+                return (r, cwds) if get_evidence else r
+    
+    return (INFINITY, tuple([])) if get_evidence else INFINITY
