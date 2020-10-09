@@ -4,19 +4,27 @@ import src.matrices as mat
 import src.rankmetric as rm
 
 def main():
-    n, m = 2, 3
     p = 2
+    n, m, k = 4, 4, 3
 
     # Base
-    B = mat.random_nonzero_matrices(n, m, 3, p)
+    B = mat.random_nonzero_matrices(n, m, k, p)
     print("Base:", mat.show_matrices(B), sep="\n")
 
     # Rank metric code
     C = rm.linear_space_spanned_by(B, p)
     print("Generated Rank-metric code:", mat.show_matrices(C), sep="\n")
 
-    print("γ(C) =", rm.gamma(C, p, get_evidence=True))
+    gamma, covering = rm.gamma(C, p, get_evidence=True)
 
+    print("γ(C) =", gamma)
+    print("Covering Codewords:\n", mat.show_matrices(covering))
+
+    gamma_test()
+
+
+def gamma_test():
+    p = 2
     print("--------------------------------------------------------------")
 
     B1= [

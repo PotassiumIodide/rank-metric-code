@@ -18,14 +18,17 @@ def linear_space_spanned_by(bases: List[Codeword], p: prime) -> Code:
     Returns:
     {List[numpy.ndarray]} - A linear space spanned by given bases.
     """
+    if not bases:
+        return []
+    
     B, l = bases, len(bases)
     n, m = B[0].shape
-    space = []
-    for lincomb in all_nary(2, l):
-        mat = np.array([0]*(n*m)).reshape(n,m)
-        for i in range(l):
-            mat += lincomb[i] * B[i]
-        space.append(np.mod(mat, p))
+    space = (
+        np.mod(
+            sum((lc * b for lc, b in zip(lincomb, B)))
+        , p)
+        for lincomb in all_nary(2, l)
+    )
     return [*map(
         lambda t: np.array(t).reshape(n,m),
         list( {*map(lambda c: tuple(c.flatten()), space)} )
